@@ -1,4 +1,4 @@
-## Lab 11: File Byte Sequence Search
+## Lab 1.1: File Byte Sequence Search
 
 This lab project aims to develop a program for searching a specified byte sequence within files in a given directory. The program will traverse the directory recursively, searching for the specified byte sequence in each file it encounters. Upon finding the byte sequence, the program will provide information about the location of the sequence within the file.
 
