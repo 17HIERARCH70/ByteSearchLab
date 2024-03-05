@@ -66,7 +66,7 @@ void search_byte_sequence(const char *directory_path, const char *target_search)
                 if (byte == target) {
                     found = 1;
                     if (debug_env != NULL && strcmp(debug_env, "1") == 0) {
-                        handle_debug("Byte sequence 0x%x found in file: %s at line number %d (full directory: %s)\n", target, full_path, line_number, directory_path);
+                        handle_debug("Byte sequence 0x%x found in file: %s at line number %d\n", target, full_path, line_number);
                     }
                     break;
                 }
