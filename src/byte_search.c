@@ -19,11 +19,11 @@ int is_regular_file(const char *path) {
 
 // Function to search for a byte sequence in files
 void search_byte_sequence(const char *directory_path, const char *target_search) {
-
+    int debug=0;
     // Check if debugging is enabled
     char *debug_env = getenv("LAB11DEBUG");
     if (debug_env != NULL && strcmp(debug_env, "1") == 0) {
-        handle_debug("Debugging enabled in byte search.");
+        debug=1;
     }
     
     if (strlen(target_search) < 4 || strncmp(target_search, "0x", 2) != 0) {
@@ -66,17 +66,19 @@ void search_byte_sequence(const char *directory_path, const char *target_search)
                 if (byte == target) {
                     found = 1;
                     if (debug_env != NULL && strcmp(debug_env, "1") == 0) {
-                        handle_debug("Found");
-                        printf("Byte sequence 0x%x found in file: %s at line number %d (full directory: %s)\n", target, full_path, line_number, directory_path);
+                        handle_debug("Byte sequence 0x%x found in file: %s at line number %d (full directory: %s)\n", target, full_path, line_number, directory_path);
                     }
                     break;
                 }
                 line_number++;
             }
+            if ((found==0) && debug==1) {
+                handle_debug("Not found byte sequence 0x%x in filepath: %s\n", target, full_path);
+            }
 
-            if (found) {
+            if (found && debug!=1) {
                 printf("Byte sequence found in file: %s\n", full_path);
-            } else {
+            } else if (!found && debug!=1) {
                 printf("Byte sequence not found in file: %s\n", full_path);
             }
 

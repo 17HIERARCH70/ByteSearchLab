@@ -25,7 +25,8 @@ int main(int argc, char *argv[]) {
     // Check if debugging is enabled
     char *debug_env = getenv("LAB11DEBUG");
     if (debug_env != NULL && strcmp(debug_env, "1") == 0) {
-        printf("Debugging is enabled.\n");
+        printf("\033[1;32mDebugging is enabled.\033[0m \n\n");
+        printf("\033[1;32mList of args:\033[0m \n");
         printf("argc = %d\n", argc);
         for (int i = 0; i < argc; i++) {
             printf("argv[%d] = %s\n", i, argv[i]);

@@ -5,6 +5,6 @@
 void handle_error(const char *message);
 
 // Function to handle debug messages
-void handle_debug(const char *message);
+void handle_debug(const char *format, ...);
 
 #endif /* ERROR_HANDLING_H */
