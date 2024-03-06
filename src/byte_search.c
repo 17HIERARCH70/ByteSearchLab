@@ -29,9 +29,10 @@ void search_byte_sequence(const char *directory_path, const char *target_search)
     // Create stack for directory entries
     DirEntry *stack = malloc(sizeof(DirEntry));
     if (stack == NULL) {
-        handle_error("Memory allocation failed");
+        handle_error_with_exit("Memory allocation failed");
         return;
     }
+    
     int stack_size = 1; // Current size of stack
     stack[0].path = strdup(directory_path);
 
@@ -55,7 +56,7 @@ void search_byte_sequence(const char *directory_path, const char *target_search)
 
             char *full_path = malloc(strlen(current_dir.path) + strlen(entry->d_name) + 2); // +2 for '/' and null terminator
             if (full_path == NULL) {
-                handle_error("Memory allocation failed");
+                handle_error_with_exit("Memory allocation failed");
                 continue;
             }
             sprintf(full_path, "%s/%s", current_dir.path, entry->d_name);
@@ -64,7 +65,7 @@ void search_byte_sequence(const char *directory_path, const char *target_search)
                 // Push directory onto stack
                 DirEntry *temp = realloc(stack, (stack_size + 1) * sizeof(DirEntry));
                 if (temp == NULL) {
-                    handle_error("Memory allocation failed");
+                    handle_error_with_exit("Memory allocation failed");
                     free(full_path);
                     continue;
                 }
