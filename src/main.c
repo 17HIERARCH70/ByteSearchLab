@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "file_traversal.h"
 #include "byte_search.h"
 #include "error_handling.h"
 

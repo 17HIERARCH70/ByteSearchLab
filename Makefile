@@ -1,7 +1,7 @@
 CC=gcc
 CFLAGS=-I./include -Wall
 
-SRCS=src/main.c src/file_traversal.c src/byte_search.c src/error_handling.c
+SRCS=src/main.c src/byte_search.c src/error_handling.c
 OBJS=$(SRCS:.c=.o)
 EXEC=lab11
 
