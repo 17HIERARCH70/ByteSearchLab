@@ -88,7 +88,7 @@ void search_in_directory(const char *directory_path, const char *target_search, 
         if (full_path == NULL) {
             handle_error_with_exit("Memory allocation failed");
         }
-        sprintf(full_path, "%s/%s", directory_path, entry->d_name);
+        snprintf(full_path, strlen(directory_path) + strlen(entry->d_name) + 2, "%s/%s", directory_path, entry->d_name);
 
         if (entry->d_type == DT_DIR) {
             // Push directory onto stack
