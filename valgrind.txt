@@ -1,0 +1,19 @@
+valgrind --leak-check=full -s --show-leak-kinds=all ./lab11 0x31 ./test
+==2339006== Memcheck, a memory error detector
+==2339006== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==2339006== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==2339006== Command: ./lab11 0x31 ./test
+==2339006==
+Byte sequence found in file: ./test/test.txt
+Byte sequence found in file: ./test/code.c
+Byte sequence found in file: ./test/subtest/smth.bin
+Byte sequence found in file: ./test/subtest/test.txt
+Byte sequence not found in file: ./test/subtest/test1.txt
+==2339006==
+==2339006== HEAP SUMMARY:
+==2339006==     in use at exit: 0 bytes in 0 blocks
+==2339006==   total heap usage: 23 allocs, 23 frees, 89,652 bytes allocated
+==2339006==
+==2339006== All heap blocks were freed -- no leaks are possible
+==2339006==
+==2339006== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
