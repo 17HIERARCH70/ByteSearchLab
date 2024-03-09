@@ -32,6 +32,43 @@ void push_directory_to_stack(DirEntry **stack, int *stack_size, const char *path
     (*stack)[(*stack_size)++].path = strdup(path);
 }
 
+// Function to search in file
+void search_in_file(const char *file_path, const char *target_search) {
+    FILE *file = fopen(file_path, "rb");
+    if (file == NULL) {
+        handle_error("Unable to open file");
+        return;
+    }
+
+    int target = strtol(target_search, NULL, 0); // Convert the hex string to an integer
+    int debug = is_debug_enabled();
+    int byte;
+    int found = 0;
+    int offset = 1;
+
+    while ((byte = fgetc(file)) != EOF) {
+        if (byte == target) {
+            found = 1;
+            if (debug) {
+                handle_debug("Byte sequence 0x%x found in file: %s, %d bytes offset\n", target, file_path, offset);
+            }
+            break;
+        }
+        offset++;
+    }
+    if ((found == 0) && debug) {
+        handle_debug("Not found byte sequence 0x%x in filepath: %s\n", target, file_path);
+    }
+
+    if (found && !debug) {
+        printf("Byte sequence found in file: %s\n", file_path);
+    } else if (!found && !debug) {
+        printf("Byte sequence not found in file: %s\n", file_path);
+    }
+
+    fclose(file);
+}
+
 // Function to search in directory
 void search_in_directory(const char *directory_path, const char *target_search, DirEntry **stack, int *stack_size) {
     DIR *dir = opendir(directory_path);
@@ -63,43 +100,6 @@ void search_in_directory(const char *directory_path, const char *target_search, 
         free(full_path);
     }
     closedir(dir);
-}
-
-// Function to search in file
-void search_in_file(const char *file_path, const char *target_search) {
-    FILE *file = fopen(file_path, "rb");
-    if (file == NULL) {
-        handle_error("Unable to open file");
-        return;
-    }
-
-    int target = strtol(target_search, NULL, 0); // Convert the hex string to an integer
-    int debug = is_debug_enabled();
-    int byte;
-    int found = 0;
-    int line_number = 1;
-
-    while ((byte = fgetc(file)) != EOF) {
-        if (byte == target) {
-            found = 1;
-            if (debug) {
-                handle_debug("Byte sequence 0x%x found in file: %s at line number %d\n", target, file_path, line_number);
-            }
-            break;
-        }
-        line_number++;
-    }
-    if ((found == 0) && debug) {
-        handle_debug("Not found byte sequence 0x%x in filepath: %s\n", target, file_path);
-    }
-
-    if (found && !debug) {
-        printf("Byte sequence found in file: %s\n", file_path);
-    } else if (!found && !debug) {
-        printf("Byte sequence not found in file: %s\n", file_path);
-    }
-
-    fclose(file);
 }
 
 // Main search function

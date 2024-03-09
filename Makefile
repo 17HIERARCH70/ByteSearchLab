@@ -1,5 +1,5 @@
 CC=gcc
-CFLAGS=-I./include -Wall
+CFLAGS=-I./include -Wall -Wextra -Werror -O3
 
 SRCS=src/main.c src/byte_search.c src/error_handling.c
 OBJS=$(SRCS:.c=.o)
