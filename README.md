@@ -58,10 +58,6 @@ If you'd like to contribute to this project, please fork the repository, make yo
 
 - [Belyakov Nikita](https://github.com/17HIERARCH70)
 
-### Acknowledgements
-
-Special thanks to [Instructor Name] for providing guidance and support throughout the development of this lab project.
-
 ### Contact
 
 For inquiries or support, please contact [Belyakov Nikita](nikitabelekov@gmail.com).
