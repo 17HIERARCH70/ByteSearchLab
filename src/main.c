@@ -67,6 +67,6 @@ int main(int argc, char *argv[]) {
 
     // Perform byte sequence search
     search_byte_sequence(argv[2], argv[1]);
-
+    
     return 0;
 }
