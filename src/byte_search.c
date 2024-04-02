@@ -106,11 +106,18 @@ void search_in_directory(const char *directory_path, const unsigned char *target
             continue;
         }
 
-        char *full_path = (char *)malloc(strlen(directory_path) + strlen(entry->d_name) + 2);
+        char *full_path;
+        if (directory_path[strlen(directory_path) - 1] == '/') {
+            full_path = (char *)malloc(strlen(directory_path) + strlen(entry->d_name) + 1);
+            sprintf(full_path, "%s%s", directory_path, entry->d_name);
+        } else {
+            full_path = (char *)malloc(strlen(directory_path) + strlen(entry->d_name) + 2);
+            sprintf(full_path, "%s/%s", directory_path, entry->d_name);
+        }
+
         if (full_path == NULL) {
             handle_error_with_exit("Memory allocation failed");
         }
-        sprintf(full_path, "%s/%s", directory_path, entry->d_name);
 
         if (entry->d_type == DT_DIR) {
             push_directory_to_stack(stack, stack_size, full_path);
@@ -121,6 +128,7 @@ void search_in_directory(const char *directory_path, const unsigned char *target
     }
     closedir(dir);
 }
+
 
 // Function to start searching for a byte sequence in a directory
 void search_byte_sequence(const char *directory_path, const char *hex_search) {
