@@ -12,7 +12,7 @@ void handle_error(const char *message) {
 
 void handle_error_with_exit(const char *message) {
     fprintf(stderr, "\033[1;31mError:\033[0m %s\n", message);
-    exit(EXIT_FAILURE); // This line was missing in your code
+    exit(EXIT_FAILURE); 
 }
 
 // Function to handle debug messages
